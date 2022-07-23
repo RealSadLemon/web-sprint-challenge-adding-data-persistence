@@ -12,11 +12,20 @@ async function getAllProjects() {
             project_completed: !!project.project_completed
         })
     })
-    
+}
+
+async function getProjectById(id) {
+    const project = await db('projects').where('project_id', id).first()
+    return project
 }
 
 async function createProject(project) {
-    
+    const projectId = await db('projects').insert(project)
+    const createdProject = await getProjectById(projectId)
+    return ({
+        ...createdProject,
+        project_completed: !!project.project_completed
+    })
 }
 
 module.exports = {
