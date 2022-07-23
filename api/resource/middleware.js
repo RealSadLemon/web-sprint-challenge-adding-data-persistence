@@ -6,7 +6,7 @@ async function resourceValidator(req, res, next) {
         return;
     } else {
         const matchingResource = await db('resources').where('resource_name', req.body.resource_name).first()
-        if(typeof matchingResource.resource_name !== 'string'){
+        if(!matchingResource){
             next();
         } else {
             res.status(400).json({message: 'resource_name already exists in database, try a different one.'})
