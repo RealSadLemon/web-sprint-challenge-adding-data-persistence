@@ -3,7 +3,7 @@ const express = require('express');
 
 const model = require('./model');
 
-const {  } = require('./middleware');
+const { taskValidator } = require('./middleware');
 
 const router = express.Router();
 
@@ -13,5 +13,12 @@ router.get('/', (req, res) => {
             res.status(200).json(tasks)
         })
 });
+
+router.post('/', taskValidator, (req, res) => {
+    model.createTask(req.body)
+        .then(task => {
+            res.status(201).json(task)
+        })
+})
 
 module.exports = router;

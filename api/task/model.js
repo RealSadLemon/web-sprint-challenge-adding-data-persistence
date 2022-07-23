@@ -15,8 +15,21 @@ async function getAllTasks() {
     })
 }
 
+async function getTaskById(id) {
+    const task = await db('tasks').where('task_id', id).first()
+    return task
+}
 
+async function createTask(task) {
+    const taskId = await db('tasks').insert(task);
+    const createdTask = await getTaskById(taskId)
+    return ({
+        ...createdTask,
+        task_completed: !!createdTask.task_completed
+    })
+}
 
 module.exports = {
-    getAllTasks
+    getAllTasks,
+    createTask
 }
