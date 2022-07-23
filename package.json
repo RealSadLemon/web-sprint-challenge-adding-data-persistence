@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "knex": "^2.2.0",
+    "nodemon": "^2.0.19",
     "sqlite3": "^5.0.8"
   }
 }
