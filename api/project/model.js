@@ -15,6 +15,11 @@ async function getAllProjects() {
     
 }
 
+async function createProject(project) {
+    
+}
+
 module.exports = {
-    getAllProjects
+    getAllProjects,
+    createProject
 }
