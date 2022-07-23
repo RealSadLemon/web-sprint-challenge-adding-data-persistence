@@ -6,3 +6,7 @@ const validateProject = (req, res, next) => {
         next();
     }
 }
+
+module.exports = {
+    validateProject
+}
