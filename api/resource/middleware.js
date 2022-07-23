@@ -14,3 +14,7 @@ async function resourceValidator(req, res, next) {
         }
     }
 }
+
+module.exports = {
+    resourceValidator
+}

@@ -3,7 +3,7 @@ const express = require('express');
 
 const model = require('./model')
 
-// const {  } = require('')
+const { resourceValidator } = require('./middleware')
 
 const router = express.Router()
 
@@ -14,6 +14,11 @@ router.get('/', (req, res) => {
         })
 })
 
-// router.post('/', )
+router.post('/', resourceValidator, (req, res, next) => {
+    model.createResource(req.body)
+        .then(resource => {
+            res.status(201).json(resource)
+        })
+})
 
 module.exports = router;
