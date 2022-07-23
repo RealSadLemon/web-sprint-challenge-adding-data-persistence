@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-    knex.schema
+    return knex.schema
         .createTable('projects', (tbl) => {
             tbl.increments('project_id')
             tbl.varchar('project_name', 80).notNullable()
@@ -22,6 +22,11 @@ exports.up = function(knex) {
             tbl.boolean('task_completed').defaultTo(0)
             tbl.integer('project_id').references('project_id').inTable('projects')
         })
+        .createTable('project_resources', (tbl) => {
+            tbl.increments('relative_id')
+            tbl.integer('project_id').references('project_id').inTable('projects')
+            tbl.integer('resource_id').references('resource_id').inTable('resources')
+        })
 };
 
 /**
@@ -29,5 +34,9 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-  
+    return knex.schema
+        .dropTableIfExists('project_resources')
+        .dropTableIfExists('tasks')
+        .dropTableIfExists('resources')
+        .dropTableIfExists('projects')
 };
